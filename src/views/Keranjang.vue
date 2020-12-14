@@ -86,7 +86,7 @@
           </td>
           <td>
             <button
-              class="btn btn-outline-secondary"
+              class="btn btn-outline-default"
               v-on:click="
                 deletePesanan(
                   keranjang.id,
@@ -94,18 +94,18 @@
                 )
               "
             >
-              del
+              <i class="fas fa-trash-alt" style="color: red"></i>
             </button>
 
             <!-- Button trigger modal -->
             <button
               @click="getPesananById(keranjang.id)"
               type="button"
-              class="btn btn-primary"
+              class="btn btn-outline-default"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >
-              upd
+              <i class="fas fa-edit"></i>
             </button>
           </td>
         </tr>
