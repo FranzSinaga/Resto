@@ -221,6 +221,16 @@ export default {
             duration: 1000,
           });
         })
+        .then(() => {
+          this.keranjangs = this.$store.state.keranjang;
+          var total = 0;
+          this.$store.state.keranjang.forEach((e) => {
+            console.log(e);
+            var totalPerItem = e.jumlah_pemesanan * e.products.harga;
+            total += totalPerItem;
+          });
+          this.total = total;
+        })
         .finally(() => {
           document.getElementById("exampleModal").click("hide");
           this.pesananUpdateData = {};
