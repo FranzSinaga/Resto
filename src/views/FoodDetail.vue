@@ -2,7 +2,8 @@
   <div class="row mt-3">
     <div class="col-md-6">
       <img
-        :src="require(`@/assets/${product.gambar}`)"
+        v-if="loadImage == false"
+        :src="require(`../assets/${product.gambar}`)"
         :alt="product.nama"
         class="img-fluid rounded"
       />
@@ -50,6 +51,7 @@ export default {
       keteranganText: "Keterangan spt: Pedes, Nasi Setengah ..",
       jumlah: 0,
       keterangan: "",
+      loadImage: true,
     };
   },
   mounted() {
@@ -57,7 +59,15 @@ export default {
       .get(`http://localhost:3000/products/${this.$route.params.id}`)
       .then((res) => {
         this.product = res.data;
+        this.loadImage = false;
       });
+  },
+  computed: {
+    image() {
+      return {
+        img: require(`../assets/${this.icon}`),
+      };
+    },
   },
   methods: {
     addToCart(e) {

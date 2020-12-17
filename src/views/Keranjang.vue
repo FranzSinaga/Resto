@@ -257,6 +257,7 @@ export default {
       };
 
       try {
+        console.log(data);
         axios
           .post("http://localhost:3000/pesanans", data)
           .then(function (response) {
@@ -269,23 +270,26 @@ export default {
               position: "top-right",
               duration: 1000,
             });
+          })
+          .then(() => {
+            this.keranjangs.map((e) => {
+              console.log(e);
+              axios
+                .delete("http://localhost:3000/keranjangs/" + e.id)
+                .then((res) => {
+                  console.log(res);
+                })
+                .then(() => {
+                  this.$store.commit("reduceKeranjangCount");
+                  this.$store.commit("deleteItemKeranjang", e.id);
+                });
+            });
+          })
+          .then(() => {
+            this.$router.push("/pesanan-sukses");
           });
       } catch (e) {
         console.log(e);
-      } finally {
-        this.keranjangs.map((e) => {
-          console.log(e);
-          axios
-            .delete("http://localhost:3000/keranjangs/" + e.id)
-            .then((res) => {
-              console.log(res);
-            })
-            .then(() => {
-              this.$store.commit("reduceKeranjangCount");
-              this.$store.commit("deleteItemKeranjang", e.id);
-            });
-        });
-        this.$router.push("/pesanan-sukses");
       }
     },
   },
